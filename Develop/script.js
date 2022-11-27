@@ -9,13 +9,15 @@ var specialCharacters = ['`','~','!','@','#','$','%','^','&','*','(',')','_','-'
 function getPasswordCriteria() {
   var userChoseNumbers = confirm("Do you want numbers in your password?");
   var userChoseUpperCase = confirm("Do you want upper case letters in your password?");
+  var userChoseLowerCase = confirm("Do you want lower case letters in your password?");
+  var userChoseSpecialCharacters = confirm("Do you want special characters in your password");
   var options = {
-    userChoseNumbers: userChoseNumbers
+    userChoseNumbers: userChoseNumbers,
+    userChoseUpperCase: userChoseUpperCase,
+    userChoseLowerCase: userChoseLowerCase,
+    userChoseSpecialCharacters: userChoseSpecialCharacters
   };
-  var options1 = {
-    userChoseUpperCase: userChoseUpperCase
-  }
-  return options1;
+  return options;
 }
 
 function createRandom(length) {
@@ -32,7 +34,19 @@ function generatePassword() {
       availableChars = availableChars.concat(numbers);
     } 
 
-    for(var i = 0; i < 4; i++) {
+    if(userChose.userChoseUpperCase) {
+      availableChars = availableChars.concat(upperCase);
+    } 
+
+    if(userChose.userChoseLowerCase) {
+      availableChars = availableChars.concat(lowerCase);
+    } 
+
+    if(userChose.userChoseSpecialCharacters) {
+      availableChars = availableChars.concat(specialCharacters);
+    } 
+
+    for(var i = 0; i < 12; i++) {
       passwordArr.push(availableChars[createRandom(availableChars.length)])
     }
 
